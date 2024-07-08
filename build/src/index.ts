@@ -1,6 +1,6 @@
 import { createCanvas } from "@napi-rs/canvas";
 import { rm, mkdir } from "fs/promises";
-import parse from "./parse";
+import parse, { parseEmoji } from "./parse";
 
 console.time("Done");
 
@@ -21,10 +21,7 @@ for (const emoji of map) {
     ctx.drawImage(image, -x * imgWidth, -y * imgHeight);
 
     await Bun.write(
-      `../assets/${Array.from(emoji)
-        .map((x) => x?.codePointAt(0)?.toString(16))
-        .filter((x) => !!x)
-        .join("-")}.png`,
+      `../assets/${parseEmoji(emoji)}.png`,
       img.toBuffer("image/png")
     );
   }

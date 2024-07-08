@@ -22,3 +22,10 @@ export default async function parse() {
 
   return { map, image, imgWidth, imgHeight };
 }
+
+export function parseEmoji(emoji: string) {
+  return Array.from(emoji)
+    .map((x) => x?.codePointAt(0)?.toString(16))
+    .filter((x) => !!x && x !== "fe0f")
+    .join("-");
+}

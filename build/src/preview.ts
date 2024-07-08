@@ -1,5 +1,5 @@
 import { createCanvas, loadImage } from "@napi-rs/canvas";
-import parse from "./parse";
+import parse, { parseEmoji } from "./parse";
 
 console.time("Done");
 
@@ -17,15 +17,12 @@ for (const emoji of map) {
   const x = i % 20;
   const y = Math.floor(i / 20);
   if (emoji !== ".") {
+    const em = parseEmoji(emoji);
+
     try {
       ctx.drawImage(
         await loadImage(
-          `https://raw.githubusercontent.com/jdecked/twemoji/main/assets/72x72/${Array.from(
-            emoji
-          )
-            .map((x) => x?.codePointAt(0)?.toString(16))
-            .filter((x) => !!x && x !== "fe0f")
-            .join("-")}.png`
+          `https://raw.githubusercontent.com/jdecked/twemoji/main/assets/72x72/${em}.png`
         ),
         x * imgWidth,
         y * imgHeight,
