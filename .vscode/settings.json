@@ -1,0 +1,5 @@
+{
+	"[javascript][typescript][json][markdown]": {
+		"editor.defaultFormatter": "dprint.dprint"
+	}
+}
